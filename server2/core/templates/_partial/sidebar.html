@@ -1,0 +1,55 @@
+{% load static %}
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+        <li class="nav-item nav-profile">
+            <div class="nav-link">
+                <div class="profile-image">
+                    <img src="{% static 'images/faces/face9.jpg' %}" alt="image"/>
+                </div>
+                <div class="profile-name">
+                    <strong>Bem vindo</strong>
+                    <p class="name">
+                        {{ user.username }}
+                    </p>
+                </div>
+            </div>
+        </li>
+        <!--<li class="nav-item">
+            <a class="nav-link" href="{% url 'competicoes:dashboard_hackathon' %}">
+                <i class="fa fa-puzzle-piece menu-icon"></i>
+                <span class="menu-title">Meus Hackthons</span>
+            </a>
+        </li>-->
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'list_teams' %}">
+                <i class="fas fa-tasks menu-icon text-info"></i>
+                <span class="menu-title">Tarefas</span>
+            </a>
+{#            <a class="nav-link" data-toggle="collapse" href="#page-layouts" aria-expanded="false"#}
+{#               aria-controls="page-layouts">#}
+{#                <i class="fas fa-user-friends menu-icon"></i>#}
+{#                <span class="menu-title">Equipes</span>#}
+{#                <i class="menu-arrow"></i>#}
+{#            </a>#}
+{##}
+{#            <div class="collapse" id="page-layouts">#}
+{#                <ul class="nav flex-column sub-menu">#}
+{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{% url 'list_teams' %}">Times</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time2</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time3</a>#}
+{#                    </li>#}
+{#                    <li class="nav-item d-none d-lg-block"><a class="nav-link" href="team/">Time4</a>#}
+{#                    </li>#}
+{#                </ul>#}
+{#            </div>#}
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">
+                <i class="fas fa-frown menu-icon"></i>
+                <span class="menu-title">Sair</span>
+            </a>
+        </li>
+    </ul>
+</nav>

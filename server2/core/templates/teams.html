@@ -1,0 +1,231 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+    <div class="content-wrapper">
+        {% if delete %}
+            <div class="msg-warning alert alert-fill-danger" role="alert">
+            <i class="fa fa-exclamation-triangle"></i>
+            Tarefa Deletada com Sucesso!
+            </div>
+        {% endif %}
+        {% if tarefa %}
+            <div class="msg-warning alert alert-fill-success" role="alert">
+            <i class="fa fa-thumbs-up"></i>
+            Tarefa Incluida com Sucesso!
+            </div>
+        {% endif %}
+        {% if edit %}
+            <div class="msg-warning alert alert-fill-success" role="alert">
+            <i class="fa fa-thumbs-up"></i>
+            Tarefa Editado com Sucesso!
+            </div>
+        {% endif %}
+
+        <script>
+            function enviarIDexcluir(tarefa_id, name, description) {
+                document.getElementById('varh4').value = tarefa_id;
+                document.getElementById('varh5').value = name;
+                document.getElementById('varh3').value = description;
+            }
+            function enviarID(tarefa_id, name, description) {
+                document.getElementById('varh1').value = tarefa_id;
+                document.getElementById('varh2').value = name;
+                document.getElementById('varh3').value = description;
+            }
+        </script>
+
+        <div class="row">
+            <!-- partial -->
+            <div class="content-wrapper">
+              <div class="page-header">
+                <h3 class="page-title">
+                  Tarefas
+                </h3>
+              </div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="table-responsive">
+                        <table id="order-listing" class="table">
+                          <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Descriçao</th>
+                                <th>Status</th>
+                                <th>Editar</th>
+                                <th>Excluir</th>
+                            </tr>
+                          </thead>
+                          {% for  member in members %}
+                              <tbody>
+                                <tr>
+                                    <td>{{ member.name }}</td>
+                                    <td>{{ member.description }}</td>
+                                    <td>
+                                        {% ifequal member.status 'Fazer' %}
+                                            <label class="badge badge-warning">{{ member.status }}</label>
+                                        {% endifequal %}
+                                        {% ifequal member.status 'Em Andamento' %}
+                                            <label class="badge badge-info">{{ member.status }}</label>
+                                        {% endifequal %}
+                                        {% ifequal member.status 'Concluido' %}
+                                            <label class="badge badge-success">{{ member.status }}</label>
+                                        {% endifequal %}
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-primary btn-icon-text" data-toggle="modal" data-target="#editar" onclick="enviarID({{ member.id }}, '{{ member.name }}', '{{ member.description }}')">Editar
+                                        <i class="fa fa-pencil-alt"></i>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn btn-outline-danger btn-icon-text" data-toggle="modal" data-target="#excluir" onclick="enviarIDexcluir({{ member.id }}, '{{ member.name }}', '{{ member.description }}')"> Deletar
+                                        <i class="fa fa-eraser"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                              </tbody>
+                          {% endfor %}
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+               {% if members%}
+               {% else %}
+                   <div class="card-body">
+                       <p class="text-muted">Você ainda não tem tarefas, crie a sua clicando <a href="" data-toggle="modal" data-target="#NovaTarefa">aqui</a>.</p>
+                  </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+         <div class="modal fade" id="excluir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content">
+                    <form method="post" action="{% url 'delete_team' %}">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ team.id }}" name="id_team">
+                            <div>
+                                <h2 style="text-align: center">Você tem certeza?<br>
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" id="varh4" name="id_team">
+                            <input class="btn btn-danger btn-fw" type="submit" value="Excluir">
+                            <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="card-title">Edite sua Tarefa</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="example-form" method="post" action="{% url 'update_team' %}">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <div>
+                                <section>
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input class="form-control form-control-lg" name="name" id="varh2" placeholder="Nome da Tarefa">
+                                        </small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descrição</label>
+                                        <input class="form-control form-control-lg" name="description" id="varh3" placeholder="Descrição da Tarefa">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Status</label>
+                                        <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="status">
+                                          <option value="Fazer" >Fazer</option>
+                                          <option value="Em Andamento" >Em Andamento</option>
+                                          <option value="Concluido" >Concluido</option>
+                                        </select>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" id="varh1" name="id_team">
+                            <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+                            <button class="btn btn-light" type="reset">Limpar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="NovaTarefa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="card-title">Crie sua Tarefa</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="example-form" method="post" action="{% url 'create_team' %}">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <div>
+                                <section>
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input class="form-control form-control-lg" name="name" id="name" placeholder="Nome da Tarefa" required>
+                                        </small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Descrição</label>
+                                        <input class="form-control form-control-lg" name="description" id="description" placeholder="Descrição da Tarefa" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Status</label>
+                                        <select class="form-control form-control-lg" id="exampleFormControlSelect1" name="status">
+                                          <option value="Fazer" >Fazer</option>
+                                          <option value="Em Andamento" >Em Andamento</option>
+                                          <option value="Concluido" >Concluido</option>
+                                        </select>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input class="btn btn-primary btn-fw" type="submit" value="Pronto">
+                            <button class="btn btn-light" type="reset">Limpar</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="theme-setting-wrapper">
+        <div id="settings-trigger" data-toggle="modal" data-target="#NovaTarefa">
+            <i class="fas fa-plus"></i>
+        </div>
+    </div>
+        <script>
+            setTimeout(function(){
+                var msg = document.getElementsByClassName("msg-warning");
+                while(msg.length > 0){
+                    msg[0].parentNode.removeChild(msg[0]);
+                }
+            }, 2000);
+        </script>
+{% endblock %}

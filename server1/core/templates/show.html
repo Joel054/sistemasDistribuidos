@@ -1,0 +1,253 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--Metas-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Pinshopy Landing page Template">
+    <title>Workidea's Hackathons</title>
+
+    <!--External Stylesheets css-->
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'assets_show/css/bootstrap.min.css' %}">
+
+    <!--elegant icon font -->
+    <link rel="stylesheet" href="{% static 'assets_show/css/elegant-icons.css' %}">
+    <!--Animate -->
+    <link rel="stylesheet" href="{% static 'assets_show/css/animate.css' %}">
+
+    <!-- Owl-carousel-->
+    <link rel="stylesheet" href="{% static 'assets_show/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_show/css/owl.theme.default.min.css' %}">
+
+
+
+    <!-- Magnific Popup-->
+    <link rel="stylesheet" href="{% static 'assets_show/css/magnific-popup.css' %}">
+
+    <!--Template Stylesheets css-->
+
+    <link rel="stylesheet" href="{% static 'assets_show/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_show/css/responsive.css' %}">
+
+
+    <!-- Fonts styles -->
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'assets_show/images/favicon.png' %}" type="image/x-icon">
+    <link rel="icon" href="{% static 'assets_show/images/favicon.png' %}" type="image/x-icon">
+
+    <script src="{% static 'assets_show/js/modernizr.js' %}"></script>
+
+
+    <!--[if lt IE 9]>
+  <script src="assets/js/html5shiv.min.js"></script>
+  <script src="assets/js/respond.min.js"></script>
+<![endif]-->
+</head>
+
+
+<body data-spy="scroll" data-target=".navbar-default" data-offset="100">
+
+    <!-- Page Preloader -->
+
+    <div id="loading-page">
+        <div id="loading-center-page">
+            <div id="loading-center-absolute">
+
+                <div class="loader"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Page Preloader -->
+
+
+    <!-- Page Content -->
+
+
+    <div class="warpper clearfix">
+
+
+        <!-- Header -->
+
+        <header class="navbar-header">
+
+            <nav class="navbar navbar-expand-lg fixed-top">
+                <div class="container">
+
+                    <a class="navbar-brand brand-logo" href=""><img src="{% static 'images/logo-branco.png' %}" style="width:155px; height:30px;" alt="logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon  icon_menu"></span>
+</button>
+                    <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item active">
+                                <a data-scroll="" class="nav-link section-scroll" href="#home">Início</a>
+                            </li>
+                            <li class="nav-item">
+                                <a data-scroll="" class="nav-link section-scroll" href="#footer">Sobre</a>
+                            </li>
+                            <li>
+                                <div class="connect-block">
+                                    <a href="{% url 'register' %}">Cadastre-se</a>
+                                    <a href="{% url 'login' %}" class="btn btn-white">Login</a>
+                                </div>
+
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+            </nav>
+
+
+
+        </header>
+        <!--Header-->
+
+        <!--Begin Hero Section-->
+
+        <section id="home" class="hero">
+            <div class="hero-bg"></div>
+
+            <!--container-->
+
+            <div class="container">
+
+                <div class="row hero-padd">
+
+
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+
+                        <div class="hero-text">
+
+                            <h2>Gerencie suas Tarefas.</h2>
+                            <p>Projeto de Sistemas Distribuidos.</p>
+
+                            <a href="{% url 'login' %}" class="btn btn-white">Comece agora</a>
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-6">
+
+                        <img src="{% static 'assets_show/images/image1.svg' %}" alt="">
+
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!--container-->
+
+        </section>
+    <!--Footer-->
+
+    <footer class="footer" id="footer">
+
+        <div class="footer-warpper">
+
+            <div class="footer-top">
+                <div class="container">
+
+
+                    <div class="footer-top  clearfix">
+
+
+                        <div class="footer-bottom-content clearfix">
+
+                            <div class="row">
+
+                                <div class="col-lg-3 col-md-3">
+
+
+
+                                    <div class="logo-footer">
+                                        <img src="assets/images/logo.png" alt="">
+
+                                    </div>
+                                    <div class="text-footer">
+                                        <p>
+                                            Trabalho em desenvolvimento para a disciplina de Sistemas Distribuidos 2018 II, Sistemas de Informação - UFSM.
+                                        </p>
+                                    </div>
+
+
+                                    <ul class="list-social list-inline">
+                                        <li>
+                                            <a href="#">
+                          <i class="social_facebook "></i>
+                        </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                          <i class="social_twitter "></i>
+                        </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                          <i class="social_googleplus "></i>
+                        </a>
+                                        </li>
+                                        <li>
+
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <!-- COPYRIGHT TEXT -->
+
+                <div class="copyright">
+                    <p>Clecio, João, Joel</p>
+                </div>
+                <!-- COPYRIGHT TEXT -->
+
+            </div>
+        </div>
+
+    </footer>
+
+    <!--Footer -->
+    <!-- jQuery -->
+    <script src="{% static 'assets_show/js/jquery-1.12.4.min.js'%}"></script>
+
+    <!-- Bootstrap Plugins -->
+    <script src="{% static 'assets_show/js/bootstrap.min.js'%}"></script>
+
+    <!-- Template Plugins -->
+    <script src="{% static 'assets_show/js/jquery.easing.js'%}"></script>
+    <script src="{% static 'assets_show/js/wow.min.js'%} "></script>
+    <script src="{% static 'assets_show/js/owl.carousel.min.js'%}"></script>
+    <script src="{% static 'assets_show/js/magnific-popup.min.js'%}"></script>
+    <script src="{% static 'assets_show/js/jquery.scrollUp.min.js'%}"></script>
+    <script src="{% static 'assets_show/js/jquery.ajaxchimp.min.js'%}"></script>
+    <script src="{% static 'assets_show/js/jquery.easy-pie-chart.js'%}"></script>
+    <!-- Main js -->
+    <script src="{% static 'assets_show/js/main.js'%}"></script>
+
+</body>
+
+</html>

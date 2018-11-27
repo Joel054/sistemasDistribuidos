@@ -1,0 +1,48 @@
+"""hackathon URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.11/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.conf.urls import url, include
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+"""
+
+from django.conf.urls import url
+from django.contrib import admin
+from core import Views
+from django.contrib.auth import views as auth_views
+# from user import views
+#from django.contrib.auth.views import login, logout
+#from user.forms import UserAdminCreationForm
+from django.urls import path, include
+from rest_framework import routers
+from rest_framework.authtoken import views
+
+from team.Views import TeamViewSet
+
+router = routers.DefaultRouter()
+router.register(r'tarefas', TeamViewSet)
+
+urlpatterns = [
+    path('api/', include(router.urls)),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name="login"),
+    path('logout/', Views.logout_view, name="logout"),
+    path('register/', Views.register, name='register'),
+    path('user/update/', Views.update_user, name='update_user'),
+    path('register_commit/', Views.register_commit, name='register_commit'),
+    url(r'^admin/', admin.site.urls),
+    url(r'^$', Views.index, name='index'),
+    url(r'^dashboard/', Views.dashboard, name='dashboard'),
+    url(r'^settings/', Views.settings, name='settings'),
+    path('team/', include("team.urls")),
+    path('hackathon/', include("competicoes.urls", namespace="competicoes")),
+    path('api-auth/', include('rest_framework.urls')),
+    path('api-token-auth/', views.obtain_auth_token, name='api-token-auth')
+]
